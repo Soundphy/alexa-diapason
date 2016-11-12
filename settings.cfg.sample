@@ -1,0 +1,5 @@
+#Configuration variables to activate or deactivate security options
+ASK_APPLICATION_ID = "amzn1.ask.skill.00000000-0000-0000-0000-000000000000"
+ASK_VERIFY_REQUESTS = True
+ASK_VERIFY_TIMESTAMP_DEBUG = False
+

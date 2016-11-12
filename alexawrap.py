@@ -5,7 +5,10 @@ from flask_ask import Ask, statement
 
 
 app = Flask(__name__)
+app.config.from_pyfile('settings.cfg', silent = True)
 ask = Ask(app, '/')
+
+
 logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
 DIAPASON_URL = "https://diapason.reset.etsii.upm.es/v0/alexa/"
