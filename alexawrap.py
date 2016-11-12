@@ -17,12 +17,8 @@ DIAPASON_URL = "https://diapason.reset.etsii.upm.es/v0/alexa/"
 def get_note(note):
     DIAPASON_URL_NOTE = DIAPASON_URL + note
     text = "<speak><audio src='%s' /></speak>" % DIAPASON_URL_NOTE
-    return statement(text).simple_card('Turning fork', text)
-
-
-@app.route('/')
-def index():
-    return '.'
+    card_text = "Playing note " + note
+    return statement(text).simple_card('Turning fork', card_text)
 
 
 if __name__ == '__main__':
