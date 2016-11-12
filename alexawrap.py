@@ -1,6 +1,6 @@
 import logging
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_ask import Ask, statement, question
 
 
@@ -15,8 +15,8 @@ DIAPASON_URL = "https://diapason.reset.etsii.upm.es/v0/alexa/"
 
 @ask.launch
 def launch():
-    welcome_text = 'Welcome'
-    help_text ='Ask me for a musical note to be played'
+    welcome_text = render_template('welcome')
+    help_text = render_template('help')
     return question(welcome_text).reprompt(help_text)
 
 @ask.intent('GetMusicalNote', mapping={'note': 'Note'})
@@ -27,14 +27,14 @@ def get_note(note):
         text = "<speak><audio src='%s' /></speak>" % DIAPASON_URL_NOTE
         card_text = "Playing note " + note
     else:
-        text = "The available musical notes are: A, B, C, D, E, F, G"
-        card_text = "The available musical notes are: A, B, C, D, E, F, G"
+        text = render_template('wrong_note')
+        card_text = render_template('wrong_note')
     return statement(text).simple_card('Turning fork', card_text)
 
 @ask.intent('AMAZON.HelpIntent')
 def help():
-    help_text = 'Ask me for a musical note to be played'
-    return question(speech_text).reprompt(speech_text).simple_card('Tuning fork', speech_text)
+    help_text = render_template('help')
+    return question(help_text).reprompt(help_text).simple_card('Tuning fork', help_text)
 
 @ask.session_ended
 def session_ended():
