@@ -1,0 +1,6 @@
+GetMusicalNote play {Note}
+GetMusicalNote play a {Note}
+GetMusicalNote play an {Note}
+GetMusicalNote give me {Note}
+GetMusicalNote give me an {Note}
+GetMusicalNote give me a {Note}

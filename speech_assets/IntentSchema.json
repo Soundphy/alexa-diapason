@@ -1,0 +1,16 @@
+{
+  "intents": [
+    {
+      "intent": "GetMusicalNote",
+      "slots": [
+        {
+          "name": "Note",
+          "type": "LIST_OF_NOTES"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    }
+  ]
+}
