@@ -1,34 +1,19 @@
-from flask import Flask, request
-import traceback
+import logging
+
+from flask import Flask
+from flask_ask import Ask, statement
+
 
 app = Flask(__name__)
+ask = Ask(app, '/')
+logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
-#Template of the response required by Alexa - JSON format
-toAlexaTemplate = '''
-{
-  "version": "1.0",
-  "response": {
-    "outputSpeech": {
-    "type": "SSML",
-    "ssml": "<speak><audio src='https://diapason.reset.etsii.upm.es/v0/alexa/%s.mp3' /></speak>"
-    },
-    "shouldEndSession": true
-  },
-  "sessionAttributes": {}
-}
 
-'''
-#<audio src="https://diapason.reset.etsii.upm.es/v0/alexa/B.mp3"/>
-@app.route('/token', methods=['POST'])
-def post_handler():
-    if request.method == 'POST':
-        try:
-            getdata = request.get_json(force=True)
-            note = getdata['request']['intent']['slots']['Note']['value']
-            toAlexa = toAlexaTemplate % note
-            return (toAlexa)
-        except Exception:
-            return traceback.format_exc()
+@ask.intent('GetMusicalNote', mapping={'note': 'Note'})
+def get_note(note):
+    text = "The note is %s" % note
+    return statement(text).simple_card('Turning fork', text)
+
 
 @app.route('/')
 def index():
