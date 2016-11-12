@@ -26,10 +26,10 @@ def get_note(note):
         DIAPASON_URL_NOTE = DIAPASON_URL + note
         text = "<speak><audio src='%s' /></speak>" % DIAPASON_URL_NOTE
         card_text = "Playing note " + note
+        return statement(text).simple_card('Turning fork', card_text)
     else:
-        text = render_template('wrong_note')
-        card_text = render_template('wrong_note')
-    return statement(text).simple_card('Turning fork', card_text)
+        text = render_template('wrong_note', notes=','.join(lnotes))
+        return statement(text)
 
 @ask.intent('AMAZON.HelpIntent')
 def help():

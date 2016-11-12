@@ -2,4 +2,4 @@ welcome: "Welcome Tuning fork"
 
 help: "Ask me to play a musical note"
 
-wrong_note: "The available musical notes are: A, B, C, D, E, F, G"
+wrong_note: "The available musical notes are: {{notes}}"
